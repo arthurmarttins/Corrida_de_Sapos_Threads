@@ -15,13 +15,13 @@ public class CorridaSaposView {
 
         while (!corridaFinalizada(sapos)) {
             for (Sapo sapo : sapos) {
-                StringBuilder progresso = new StringBuilder();
-                int distance = sapo.getDistance();
-                for (int i = 0; i < distance; i++) {
-                    progresso.append("-");
-                }
-                progresso.append(sapo.getName());
-                System.out.println(progresso);
+            	StringBuilder progresso = new StringBuilder();
+            	int hyphens = sapo.getDistance();
+            	for (int i = 0; i < hyphens; i++) {
+            	    progresso.append("-");
+            	}
+            	progresso.append("🐸"); // Caractere de sapo
+            	System.out.println(progresso);
             }
 
             System.out.println();
@@ -33,7 +33,13 @@ public class CorridaSaposView {
         }
 
         System.out.println("Corrida finalizada!");
-        System.out.println("Sapo vencedor: " + determinarVencedor(sapos).getName());
+
+        Sapo vencedor = determinarVencedor(sapos);
+        if (vencedor != null) {
+            System.out.println(vencedor.getName() + " gritou 🐸: IHHUP EU VENCI, SEUS LERDOS!");
+        } else {
+            System.out.println("Nenhum sapo completou a corrida.");
+        }
     }
 
     private boolean corridaFinalizada(List<Sapo> sapos) {
@@ -46,13 +52,20 @@ public class CorridaSaposView {
     }
 
     private Sapo determinarVencedor(List<Sapo> sapos) {
-        Sapo vencedor = sapos.get(0);
-        for (int i = 1; i < sapos.size(); i++) {
-            Sapo sapo = sapos.get(i);
-            if (sapo.getDistance() > vencedor.getDistance()) {
+        Sapo vencedor = null;
+        int maxHyphens = -1;
+
+        for (Sapo sapo : sapos) {
+            int hyphens = sapo.getDistance();
+            if (hyphens > maxHyphens) {
+                maxHyphens = hyphens;
                 vencedor = sapo;
             }
         }
+
         return vencedor;
     }
+
+    
+    
 }

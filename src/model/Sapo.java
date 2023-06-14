@@ -7,10 +7,12 @@ public class Sapo implements Runnable {
 
     private String name;
     private int distance;
+    private Random random;
 
     public Sapo(String name) {
         this.name = name;
         this.distance = 0;
+        this.random = new Random(); // Cada sapo tem seu próprio gerador de números aleatórios
     }
 
     public String getName() {
@@ -23,7 +25,6 @@ public class Sapo implements Runnable {
 
     @Override
     public void run() {
-        Random random = new Random();
         while (distance < MAX_DISTANCE) {
             int jumpDistance = random.nextInt(6); // Números aleatórios de 0 a 5
             distance += jumpDistance;
